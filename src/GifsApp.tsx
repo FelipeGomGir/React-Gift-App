@@ -1,19 +1,11 @@
-import React, { useState } from 'react'
-import { mockGifs } from './mock-data/gifs.mock'
 import CustomHeader from './shared/components/CustomHeader'
 import PreviousSearches from './gifs/components/PreviousSearches'
 import SearchBar from './shared/components/SearchBar'
 import GifList from './gifs/components/GifList'
+import useGifs from './gifs/hooks/useGifs'
 
-const GifsApp = () => {
-    const [previousTerms, setPreviousTerms] = useState(['dragon ball z']);
-    const handleTermClicked = (term: string) => {
-        console.log({ term });
-    }
-    const handleSearch = (query: string) => {
-        console.log({ query });
-    }
-
+export const GifsApp = () => {
+    const { previousTerms, handleSearch, handleTermClicked, gifs } = useGifs()
     return (
         <>
             {/* Header */}
@@ -25,9 +17,8 @@ const GifsApp = () => {
             {/* Previous searches */}
             <PreviousSearches title='Busquedas previas' searches={previousTerms} onLabelClicked={handleTermClicked} />
             {/* Gifs*/}
-            <GifList gifs={mockGifs} />
+            <GifList gifs={gifs} />
         </>
     )
 }
 
-export default GifsApp
